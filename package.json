@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "json-server --watch ./database/db.json"
+},
+  "dependencies": {
+    "json-server": "^1.0.0-alpha.23"
+  },
+  "name": "phase-2-project",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
