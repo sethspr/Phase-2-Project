@@ -1,50 +1,38 @@
-import React, {useState} from "react";
-import './NavBar.css'
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import './NavBar.css';
 
 const NavBar = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
 
-    // to change burger classes
-    const [burger_class, setBurgerClass] = useState("burger-bar unclicked")
-    const [menu_class, setMenuClass] = useState("menu hidden")
-    const [isMenuClicked, setIsMenuClicked] = useState(false)
-
-    // toggle burger menu change
-    const updateMenu = () => {
-        if(!isMenuClicked) {
-            setBurgerClass("burger-bar clicked")
-            setMenuClass("menu visible")
-        }
-        else {
-            setBurgerClass("burger-bar unclicked")
-            setMenuClass("menu hidden")
-        }
-        setIsMenuClicked(!isMenuClicked)
-    }
-
-    return(
-        <div style={{width: '100%', height: '20vh'}}>
-            <nav>
-                <div className="burger-menu" onClick={updateMenu}>
-                    <div className={burger_class} ></div>
-                    <div className={burger_class} ></div>
-                    <div className={burger_class} ></div>
-                    
+    return (
+        <nav>
+            <div className="logo-search-container">
+                <Link to="/" className="logo">
+                    <img src="https://i.pinimg.com/originals/ec/81/69/ec8169fec55371f6824b8a0f3725c4b2.png" alt="" />
+                </Link>
+                <div className='searchBar'>
+                    <input type='text' className='search' placeholder='Search...' />
                 </div>
-
-              
-            </nav>
-
-            <div className={menu_class}>
-                {/* Conditionally render the h2 elements when menu is active */}
-                {isMenuClicked && (
-                    <>
-                        <h2>Menu Item 1</h2>
-                        <h2>Menu Item 2</h2>
-                    </>
-                )}
             </div>
-        </div>
-    )
+            <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul className={menuOpen ? 'open' : ''}>
+                <li>
+                    <NavLink className='links' to="/about">About</NavLink>
+                </li>
+                <li>
+                    <NavLink className='links' to="/posts">Posts</NavLink>
+                </li>
+                <li>
+                    <NavLink className='links' to="/cool">Cool</NavLink>
+                </li>
+            </ul>
+        </nav>
+    );
 }
 
 export default NavBar;
