@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const NewComment = ({needComments, setNeedComments}) => {
+const NewComment = ({comments, setDisplayComments}) => {
 
     const [comment, setComment] = useState("")
 
@@ -9,10 +9,14 @@ const NewComment = ({needComments, setNeedComments}) => {
         e.preventDefault()
         console.log('Hey');
         
-        const newComment = comment
+        // const newComment = comment
+
+        // console.log(  needComments)
+
+
        
-        setNeedComments(
-            [...needComments, newComment]
+        setDisplayComments(
+            [...comments, comment]
         );
 
     }

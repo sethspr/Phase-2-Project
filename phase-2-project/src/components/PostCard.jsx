@@ -6,6 +6,8 @@ function PostCard({ id, name, review, likes, comments = [], image }) {
     const [upLikes, setUpLikes] = useState(likes);
     const [isComment, setIsComment] = useState(false)
     const [showPost, setShowPost] = useState(true)
+
+    const [displayComments, setDisplayComments] = useState(comments)
     
     function handleLikes(smth) {
       const updatedLikes = smth ? upLikes + 1 : upLikes - 1
@@ -46,11 +48,11 @@ function PostCard({ id, name, review, likes, comments = [], image }) {
                 </div>
                 <button className="comment-button" onClick={showComment}> Comment: 💬</button>
                { isComment && (<ul className="comment-section">
-                    {comments.map((comment, index) => (
+                    {displayComments.map((comment, index) => (
                         <p key={index} className="comment-bubble">{comment}</p>
                     ))}
                 </ul>)}
-                <NewComment />
+                <NewComment comments = {displayComments} setDisplayComments={setDisplayComments} />
             </div>
         </div>
     );
