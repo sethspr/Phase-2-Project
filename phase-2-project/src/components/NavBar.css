@@ -2,12 +2,15 @@
     background-color: #1d4ed8;
 }
 
+
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #3b5998; /* Facebook blue */
     padding: 0 1rem; /* Add padding to the navbar */
+    position: sticky;
 }
 
 .logo-search-container {
