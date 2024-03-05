@@ -13,6 +13,16 @@ import Home from './pages/Home'
 
 function App() {
 
+  const [mediaPosts, setMediaPosts] = useState([])
+
+  useEffect(()=> {
+    fetch(`http://localhost:3000/posts`)
+    .then((r) => r.json())
+    .then((d) => {
+      setMediaPosts(d)
+    }, [])
+  })
+ 
 
   return (
     <div className='App'>
