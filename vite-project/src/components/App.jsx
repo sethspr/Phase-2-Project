@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import NewPost from './NewPost'
 import NavBar from './NavBar'
 import './App.css'
@@ -12,7 +12,7 @@ import Home from './pages/Home'
 
 
 function App() {
- 
+
 
   return (
     <div className='App'>
@@ -23,8 +23,8 @@ function App() {
       <Route path='about' element={<About/>}/>
       <Route path='cool' element={<Cool/>}/>
       <Route path='posts' element={<Post/>}/>
-
     </Routes>
+    <Post mediaPosts={mediaPosts}/>
     </div>
   )
 }

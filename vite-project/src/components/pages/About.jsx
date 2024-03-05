@@ -1,6 +1,5 @@
 import React from 'react';
 import './About.css'
-import NavBar from '../NavBar'; // Import your NavBar component here
 
 
 const About = () => {
