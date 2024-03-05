@@ -1,46 +1,59 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react';
+import './PostCard.css';
+import NewComment from './NewComment';
 
-function PostCard({ id, name, review, likes, comments, image }) {
-    const [isLiked, setIsLiked] = useState(likes);
-
-    function handleClick() {
-      setIsLiked(!isLiked);
-      fetch(http://localhost:4000/posts/${id}, {
+function PostCard({ id, name, review, likes, comments = [], image }) {
+    const [upLikes, setUpLikes] = useState(likes);
+    const [isComment, setIsComment] = useState(false)
+    const [showPost, setShowPost] = useState(true)
+    
+    function handleLikes(smth) {
+      const updatedLikes = smth ? upLikes + 1 : upLikes - 1
+      fetch(`http://localhost:3000/posts/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          isLiked: (isLiked + 1),
-        }), // only PATCH-ing likes - need to add comments
+          likes: updatedLikes
+        }),
       })
-        .then((response) => response.json())
-        .then((data) => setIsLiked(data.isLiked));
-
-      // setIsLiked(!isLiked); // this can be called before or after fetch, as long as it's within the object.
+      .then((response) => response.json())
+      .then((data) => setUpLikes(data.likes))
+      .catch((error) => console.error('Error updating likes:', error));
     }
+    
+    
+   
+        function showComment() {
+          setIsComment(!isComment)
+        }
+
 
     return (
         <div className="post-container">
-          <div className="post-header">
-            <h3>{name}</h3>
-            <img src={image} alt="Post Image" />
-            <p style={{ fontWeight: 'bold' }}>{review}</p>
-            <div className="like-button-container">
-              <button className="like-button" onClick={handleClick}>
-                {isLiked ? "✔️" : "✅"}
-              </button>
+            <div className="post-header">
+                <h3>{name}</h3>
+                <img src={image} alt="Post Image" />
+                <p style={{ fontWeight: 'bold' }}>{review}</p>
+                <div className="like-button-container">
+                    <button className="like-button" onClick={() => handleLikes(true)}>
+                        {upLikes} 👍🏽
+                    </button>
+                    <button className="dislike-button" onClick={() => handleLikes(false)}>
+                          👎🏽
+                    </button>
+                </div>
+                <button className="comment-button" onClick={showComment}> Comment: 💬</button>
+               { isComment && (<ul className="comment-section">
+                    {comments.map((comment, index) => (
+                        <p key={index} className="comment-bubble">{comment}</p>
+                    ))}
+                </ul>)}
+                <NewComment />
             </div>
-            <ul className="comment-section">
-              {comments.map((comment, index) => (
-                <p key={index} className="comment-bubble">{comment}</p>
-              ))}
-            </ul>
-          </div>
         </div>
-      );
-
+    );
 }
 
-export default PostCard
+export default PostCard;

@@ -7,6 +7,7 @@ import About from './pages/About'
 import Cool from './pages/Cool'
 import Post from './pages/Post'
 import Home from './pages/Home'
+import PostList from './PostList'
 
 
 
@@ -14,6 +15,8 @@ import Home from './pages/Home'
 function App() {
 
   const [mediaPosts, setMediaPosts] = useState([])
+
+  const [needComments, setNeedComments] = useState(mediaPosts.comments)
 
   useEffect(()=> {
     fetch(`http://localhost:3000/posts`)
@@ -27,14 +30,14 @@ function App() {
   return (
     <div className='App'>
     <NavBar/>
-    <NewPost/>
-    <Routes>
+    <NewPost posts={mediaPosts} setData={setMediaPosts}/>
+        <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='about' element={<About/>}/>
       <Route path='cool' element={<Cool/>}/>
       <Route path='posts' element={<Post/>}/>
     </Routes>
-    <Post mediaPosts={mediaPosts}/>
+    <PostList mediaPosts={mediaPosts} setData={setMediaPosts} needComments={needComments} setNeedComments={setNeedComments}/>
     </div>
   )
 }
