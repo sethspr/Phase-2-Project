@@ -3,7 +3,7 @@ import PostCard from './PostCard'
 
 function PostList({ mediaPosts, setData, needComments, setNeedComments, addComment}) {
   return (
-    <div className="post-list">Feed
+    <div className="post-list">
         {mediaPosts.map((mediaPost) => 
         <PostCard 
             post ={mediaPost}
@@ -17,8 +17,9 @@ function PostList({ mediaPosts, setData, needComments, setNeedComments, addComme
             image={mediaPost.image}
             likes={mediaPost.likes}
             comments={mediaPost.comments}
+            profilePic={mediaPost.profilePic}
         />)}
-       
+
     </div>
   )
 }
