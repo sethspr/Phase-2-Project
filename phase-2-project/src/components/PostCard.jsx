@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './PostCard.css';
 import NewComment from './NewComment';
+import { Link } from 'react-router-dom';
 
 function PostCard({ id, name, review, likes, comments = [], image }) {
     const [upLikes, setUpLikes] = useState(likes);
@@ -35,7 +36,7 @@ function PostCard({ id, name, review, likes, comments = [], image }) {
     return (
         <div className="post-container">
             <div className="post-header">
-                <h3>{name}</h3>
+            <Link to={`/profile/${id}`}><h3>{name}</h3></Link>
                 <img src={image} alt="Post Image" />
                 <p style={{ fontWeight: 'bold' }}>{review}</p>
                 <div className="like-button-container">

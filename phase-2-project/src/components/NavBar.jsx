@@ -22,10 +22,13 @@ const NavBar = () => {
             </div>
             <ul className={menuOpen ? 'open' : ''}>
                 <li>
+                    <NavLink className='links' to="/">Home</NavLink>
+                </li>
+                <li>
                     <NavLink className='links' to="/about">About</NavLink>
                 </li>
                 <li>
-                    <NavLink className='links' to="/posts">Posts</NavLink>
+                    <NavLink className='links' to="/post">Post</NavLink>
                 </li>
                 <li>
                     <NavLink className='links' to="/cool">Cool</NavLink>
